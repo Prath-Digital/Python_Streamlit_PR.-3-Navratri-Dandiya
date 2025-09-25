@@ -1,31 +1,31 @@
 import streamlit as st
-import base64
 import random
-import os
 
 
-def get_image_data(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode("utf-8")
+# -------------------------------
+# Function to get the raw GitHub image URL
+# -------------------------------
+def get_image_url(color):
+    base_url = "https://raw.githubusercontent.com/Prath-Digital/Python_Streamlit_PR.-3-Navratri-Dandiya/main/assets/imgs"
+    return f"{base_url}/dandiya_{color}.png"
 
 
-def img_path_creator(color):
-    base_path = (
-        r"C:\Users\Dell\Desktop\Python_Streamlit_PR.-3-Navratri-Dandiya\assets\imgs"
-    )
-    return os.path.join(base_path, f"dandiya_{color}.png")
-
-
+# -------------------------------
+# App Title
+# -------------------------------
 st.title("Let's Play Dandiya!")
 
+# -------------------------------
+# Available colors
+# -------------------------------
 colors = ["red", "blue", "green", "yellow", "purple", "orange"]
 
-# STEP 1: User picks color first (always visible)
+# STEP 1: User picks a color
 picked_color = st.selectbox(
     "Pick a stick color", options=["-- Select a color --"] + colors
 )
 
-# STEP 2: Then they click Play button
+# STEP 2: Play button
 if st.button("Play Dandiya"):
     if picked_color == "-- Select a color --":
         st.warning("Please select a color to play Dandiya!")
@@ -33,14 +33,15 @@ if st.button("Play Dandiya"):
         st.balloons()
         token = random.randint(100000, 999999)
 
-        # image data
-        dandiya_image = get_image_data(img_path_creator(picked_color))
+        # Get image URL
+        image_url = get_image_url(picked_color)
 
+        # Animated sticks using HTML/CSS
         html_code = f"""
         <div style="display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:20px;">
           <div style="display:flex; justify-content:center; gap:50px;">
-            <img src="data:image/png;base64,{dandiya_image}" class="d1_{token}" style="width:100px;">
-            <img src="data:image/png;base64,{dandiya_image}" class="d2_{token}" style="width:100px;">
+            <img src="{image_url}" class="d1_{token}" style="width:100px;">
+            <img src="{image_url}" class="d2_{token}" style="width:100px;">
           </div>
 
           <div style="margin-top:8px; display:flex; gap:10px; align-items:center;">
@@ -70,7 +71,10 @@ if st.button("Play Dandiya"):
         """
         st.markdown(html_code, unsafe_allow_html=True)
 
+# -------------------------------
+# Footer
+# -------------------------------
 st.markdown("---")
 st.info(
-    "Thank you!\nFeel free to explore more about it and happy coding!🚀\n- ***Prath-Digital*** 🧑🏻‍💻"
+    "Thank you!\nFeel free to explore more about it and happy coding! 🚀\n- ***Prath-Digital*** 🧑🏻‍💻"
 )
