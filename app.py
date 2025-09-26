@@ -2,33 +2,33 @@ import streamlit as st
 import random
 
 
-# -------------------------------
+# ===============================
 # Function to get the raw GitHub image URL
-# -------------------------------
+# ===============================
 def get_image_url(color):
     base_url = "https://raw.githubusercontent.com/Prath-Digital/Python_Streamlit_PR.-3-Navratri-Dandiya/main/assets/imgs"
     return f"{base_url}/dandiya_{color}.png"
 
 
-# -------------------------------
+# ===============================
 # App Title
-# -------------------------------
-st.title("Let's Play Dandiya!")
+# ===============================
+st.title("Hi Guys, Let's Play Dandiya!")
 
-# -------------------------------
+# ===============================
 # Available colors
-# -------------------------------
+# ===============================
 colors = ["red", "blue", "green", "yellow", "purple", "orange"]
 
 # STEP 1: User picks a color
 picked_color = st.selectbox(
-    "Pick a stick color", options=["-- Select a color --"] + colors
+    "Pick a stick color", options=["== Select a color =="] + colors
 )
 
 # STEP 2: Play button
 if st.button("Play Dandiya"):
-    if picked_color == "-- Select a color --":
-        st.warning("Please select a color to play Dandiya!")
+    if picked_color == "== Select a color ==":
+        st.warning("Please select a color to play Dandiya!\nThe colors are in the dropdown above.")
     else:
         st.balloons()
         token = random.randint(100000, 999999)
@@ -71,10 +71,10 @@ if st.button("Play Dandiya"):
         """
         st.markdown(html_code, unsafe_allow_html=True)
 
-# -------------------------------
+# ===============================
 # Footer
-# -------------------------------
-st.markdown("---")
+# ===============================
+st.markdown("===")
 st.info(
     "Thank you!\nFeel free to explore more about it and happy coding! 🚀\n- ***Prath-Digital*** 🧑🏻‍💻"
 )
